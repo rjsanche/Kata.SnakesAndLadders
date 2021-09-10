@@ -50,6 +50,7 @@ namespace SnakesAndLaddersTest
         {
             //arrange
             var expected = 100;
+            var expectedWin = true;
             SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine();
             
             while(snakesAndLadders.GetCurrentPosition() != 97)
@@ -59,8 +60,10 @@ namespace SnakesAndLaddersTest
             snakesAndLadders.Move(3);
             //act
             var actual = snakesAndLadders.GetCurrentPosition();
+            var actualPlayerWin = snakesAndLadders.PlayerWin();
             //assert
             Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expectedWin, actualPlayerWin);
         }
 
 

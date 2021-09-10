@@ -10,6 +10,7 @@ namespace SnakesAndLadders
     {
         #region Fields
         private const int INIT_POSITION = 1;
+        private const int END_POSITION = 100;
         private int  _currentPosition;
         #endregion
 
@@ -31,6 +32,11 @@ namespace SnakesAndLadders
         public void Move(int diceNumber)
         {
             _currentPosition += diceNumber;
+        }
+
+        public bool PlayerWin()
+        {
+            return GetCurrentPosition() == END_POSITION;
         }
         #endregion
     }
