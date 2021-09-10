@@ -31,10 +31,10 @@ namespace SnakesAndLadders
 
         public void Move(int diceNumber)
         {
-            _currentPosition += diceNumber;
-            if(_currentPosition > 100)
+            int tempPosition = _currentPosition + diceNumber;
+            if(tempPosition <= END_POSITION)
             {
-                _currentPosition = 97;
+                _currentPosition = tempPosition;
             }
         }
 
