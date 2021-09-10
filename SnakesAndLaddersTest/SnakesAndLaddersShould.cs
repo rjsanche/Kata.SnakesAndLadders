@@ -31,5 +31,20 @@ namespace SnakesAndLaddersTest
             Assert.AreEqual(expected, actual);
         }
 
+        [TestMethod]
+        public void GivenTheTokenIn1Move3NextMove4ThenJumpIntoSquare8()
+        {
+            //arrange
+            var expected = 8;
+            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine();
+            snakesAndLadders.Move(3);
+            snakesAndLadders.Move(4);
+            //act
+            var actual = snakesAndLadders.GetCurrentPosition();
+            //assert
+            Assert.AreEqual(expected, actual);
+        }
+
+
     }
 }
