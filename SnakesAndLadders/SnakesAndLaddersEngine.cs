@@ -42,6 +42,12 @@ namespace SnakesAndLadders
         {
             return GetCurrentPosition() == END_POSITION;
         }
+
+        public int RollDie()
+        {            
+            Random random = new Random();
+            return random.Next(1, 6);
+        }
         #endregion
     }
 }

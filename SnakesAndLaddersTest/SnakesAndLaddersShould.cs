@@ -84,6 +84,21 @@ namespace SnakesAndLaddersTest
             Assert.AreEqual(expected, actual);
         }
 
+        [TestMethod]
+        public void GivenTheGameStartedRollsDieResultRange1_6_inclusive()
+        {
+            //arrange
+            var expectedMin = 1;
+            var expectedMax = 6;
+            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine();
+
+            //act
+            var actual = snakesAndLadders.RollDie();
+            //assert
+            Assert.IsTrue(expectedMin <= actual);
+            Assert.IsTrue(expectedMax >= actual);
+        }
+
 
     }
 }
