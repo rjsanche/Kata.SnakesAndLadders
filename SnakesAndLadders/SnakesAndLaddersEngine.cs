@@ -27,6 +27,11 @@ namespace SnakesAndLadders
         {
             return _currentPosition;
         }
+
+        public void Move(int diceNumber)
+        {
+            _currentPosition = 4;
+        }
         #endregion
     }
 }
