@@ -46,7 +46,9 @@ namespace SnakesAndLadders
         public int RollDie()
         {            
             Random random = new Random();
-            return random.Next(1, 6);
+            int result =  random.Next(1, 6);
+            Move(result);
+            return result;
         }
 
         public void Roll(int fixDie)
