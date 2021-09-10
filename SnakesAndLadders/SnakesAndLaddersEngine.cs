@@ -31,6 +31,10 @@ namespace SnakesAndLadders
         public void Move(int diceNumber)
         {
             _currentPosition += diceNumber;
+            if(_currentPosition > 100)
+            {
+                _currentPosition = 97;
+            }
         }
         #endregion
     }

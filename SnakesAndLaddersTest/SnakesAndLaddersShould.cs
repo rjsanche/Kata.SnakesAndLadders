@@ -45,6 +45,25 @@ namespace SnakesAndLaddersTest
             Assert.AreEqual(expected, actual);
         }
 
+        [TestMethod]
+        public void GivenTheTokenIn97Move4BounceIntoSquare97()
+        {
+            //arrange
+            var expected = 97;
+            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine();
+            
+            while(snakesAndLadders.GetCurrentPosition() != 97)
+            {
+                snakesAndLadders.Move(1);
+            }
+            snakesAndLadders.Move(4);
+            //act
+            var actual = snakesAndLadders.GetCurrentPosition();
+            //assert
+            Assert.AreEqual(expected, actual);
+        }
+
+
 
     }
 }
