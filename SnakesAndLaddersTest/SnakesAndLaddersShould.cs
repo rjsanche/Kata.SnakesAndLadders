@@ -105,9 +105,12 @@ namespace SnakesAndLaddersTest
             //arrange
             var expected = 4;
             SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine();
-            int lastPosition = snakesAndLadders.GetCurrentPosition();
+            int lastPosition = 0;
             //act
-            snakesAndLadders.Roll(4);
+            while(snakesAndLadders.RollDie() != 4)
+            {
+                lastPosition = snakesAndLadders.GetCurrentPosition();
+            }
             var actual = snakesAndLadders.GetCurrentPosition() - lastPosition;
             //assert
             Assert.AreEqual(expected, actual);

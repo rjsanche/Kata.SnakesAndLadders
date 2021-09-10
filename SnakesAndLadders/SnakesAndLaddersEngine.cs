@@ -51,10 +51,6 @@ namespace SnakesAndLadders
             return result;
         }
 
-        public void Roll(int fixDie)
-        {
-            Move(fixDie);
-        }
         #endregion
     }
 }
