@@ -99,6 +99,19 @@ namespace SnakesAndLaddersTest
             Assert.IsTrue(expectedMax >= actual);
         }
 
+        [TestMethod]
+        public void GivenThePlayerRolls4ThenMoveTheirTokenThenMove4Spaces()
+        {
+            //arrange
+            var expected = 4;
+            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine();
+            int lastPosition = snakesAndLadders.GetCurrentPosition();
+            //act
+            snakesAndLadders.Roll(4);
+            var actual = snakesAndLadders.GetCurrentPosition() - lastPosition;
+            //assert
+            Assert.AreEqual(expected, actual);
+        }
 
     }
 }

@@ -48,6 +48,11 @@ namespace SnakesAndLadders
             Random random = new Random();
             return random.Next(1, 6);
         }
+
+        public void Roll(int fixDie)
+        {
+            Move(fixDie);
+        }
         #endregion
     }
 }
