@@ -46,17 +46,17 @@ namespace SnakesAndLaddersTest
         }
 
         [TestMethod]
-        public void GivenTheTokenIn97Move4BounceIntoSquare97()
+        public void GivenTheTokenIn97Move3ThenJumpIntoSquare100_PlayerWins()
         {
             //arrange
-            var expected = 97;
+            var expected = 100;
             SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine();
             
             while(snakesAndLadders.GetCurrentPosition() != 97)
             {
                 snakesAndLadders.Move(1);
             }
-            snakesAndLadders.Move(4);
+            snakesAndLadders.Move(3);
             //act
             var actual = snakesAndLadders.GetCurrentPosition();
             //assert
