@@ -38,7 +38,8 @@ namespace SnakesAndLaddersTest
         {
             //arrange
             var expected = 8;
-            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new RulesManager(), new Dice());
+                        
+            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new FakeRulesManager(), new Dice());
             snakesAndLadders.Move(3);
             snakesAndLadders.Move(4);
             //act
@@ -117,12 +118,12 @@ namespace SnakesAndLaddersTest
         }
 
         [TestMethod]
-        public void GivenThereIsASnakeConnectingSquares2and12sWhenTokenIsIn12ThenReturnTo2()
+        public void GivenThereIsASnakeConnectingSquares6and16sWhenTokenIsIn16ThenReturnTo6()
         {
             //arrange
-            var expected = 2;
+            var expected =6;
             var mockDice = new Mock<IDice>();
-            mockDice.Setup(x => x.Rolls()).Returns(11);
+            mockDice.Setup(x => x.Rolls()).Returns(15);
             SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new RulesManager(), mockDice.Object);
 
             //act
@@ -134,10 +135,61 @@ namespace SnakesAndLaddersTest
         }
 
         [TestMethod]
-        public void GivenThereIsASnakeConnectingSquares2and12sWhenTokenIsIn2ThenReturnTo2()
+        public void GivenThereIsASnakeConnectingSquares16and6sWhenTokenIsIn6ThenReturnTo6()
         {
             //arrange
-            var expected = 2;
+            var expected = 6;
+            var mockDice = new Mock<IDice>();
+            mockDice.Setup(x => x.Rolls()).Returns(5);
+            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new RulesManager(), mockDice.Object);
+
+            //act
+            snakesAndLadders.RollDie();
+
+            var actual = snakesAndLadders.GetCurrentPosition();
+            //assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void GivenThereIsASnakeConnectingSquares46and25sWhenTokenIsIn46ThenReturnTo25()
+        {
+            //arrange
+            var expected = 25;
+            var mockDice = new Mock<IDice>();
+            mockDice.Setup(x => x.Rolls()).Returns(45);
+            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new RulesManager(), mockDice.Object);
+
+            //act
+            snakesAndLadders.RollDie();
+
+            var actual = snakesAndLadders.GetCurrentPosition();
+            //assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void GivenThereIsASnakeConnectingSquares99and80sWhenTokenIsIn99ThenReturnTo80()
+        {
+            //arrange
+            var expected = 80;
+            var mockDice = new Mock<IDice>();
+            mockDice.Setup(x => x.Rolls()).Returns(98);
+            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new RulesManager(), mockDice.Object);
+
+            //act
+            snakesAndLadders.RollDie();
+
+            var actual = snakesAndLadders.GetCurrentPosition();
+            //assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void GivenThereIsALadderConnectingSquares2and38sWhenTokenIsIn2ThenGoTo38()
+        {
+            //arrange
+            var expected = 38;
             var mockDice = new Mock<IDice>();
             mockDice.Setup(x => x.Rolls()).Returns(1);
             SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new RulesManager(), mockDice.Object);
@@ -149,7 +201,6 @@ namespace SnakesAndLaddersTest
             //assert
             Assert.AreEqual(expected, actual);
         }
-
 
     }
 }

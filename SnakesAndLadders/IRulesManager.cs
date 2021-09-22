@@ -12,5 +12,7 @@ namespace SnakesAndLadders
         int GetCurrentPosition();
 
         bool PlayerWin();
+
+        int CheckSpecialSquare(int number);
     }
 }
