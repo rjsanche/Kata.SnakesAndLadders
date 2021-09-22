@@ -1,6 +1,7 @@
-﻿using System;
+﻿using SnakesAndLadders;
+using System;
 
-namespace SnakesAndLadders
+namespace SnakesAndLaddersApp
 {
     class Program
     {
@@ -15,7 +16,7 @@ namespace SnakesAndLadders
             IDice dice = new Dice();
             IRulesManager rulesManager = new RulesManager();
             SnakesAndLaddersEngine snakesAndLaddersEngine = new SnakesAndLaddersEngine(rulesManager, dice);
-            while(!snakesAndLaddersEngine.PlayerWin())
+            while (!snakesAndLaddersEngine.PlayerWin())
             {
                 Console.WriteLine();
                 Console.WriteLine($"You are in {snakesAndLaddersEngine.GetCurrentPosition()} position");
