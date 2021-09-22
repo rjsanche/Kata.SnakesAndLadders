@@ -133,5 +133,23 @@ namespace SnakesAndLaddersTest
             Assert.AreEqual(expected, actual);
         }
 
+        [TestMethod]
+        public void GivenThereIsASnakeConnectingSquares2and12sWhenTokenIsIn2ThenReturnTo2()
+        {
+            //arrange
+            var expected = 2;
+            var mockDice = new Mock<IDice>();
+            mockDice.Setup(x => x.Rolls()).Returns(1);
+            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new RulesManager(), mockDice.Object);
+
+            //act
+            snakesAndLadders.RollDie();
+
+            var actual = snakesAndLadders.GetCurrentPosition();
+            //assert
+            Assert.AreEqual(expected, actual);
+        }
+
+
     }
 }
