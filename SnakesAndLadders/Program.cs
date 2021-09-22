@@ -13,7 +13,8 @@ namespace SnakesAndLadders
             Console.WriteLine("Press enter to start.");
             Console.ReadLine();
             IDice dice = new Dice();
-            SnakesAndLaddersEngine snakesAndLaddersEngine = new SnakesAndLaddersEngine(dice);
+            IRulesManager rulesManager = new RulesManager();
+            SnakesAndLaddersEngine snakesAndLaddersEngine = new SnakesAndLaddersEngine(rulesManager, dice);
             while(!snakesAndLaddersEngine.PlayerWin())
             {
                 Console.WriteLine();

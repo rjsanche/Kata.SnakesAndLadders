@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using SnakesAndLadders;
 
 namespace SnakesAndLaddersTest
@@ -12,7 +13,7 @@ namespace SnakesAndLaddersTest
             //arrange
             var expected = 1;
             
-            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new Dice());
+            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new RulesManager(), new Dice());
             //act
             var actual = snakesAndLadders.GetCurrentPosition();
             //assert
@@ -24,7 +25,7 @@ namespace SnakesAndLaddersTest
         {
             //arrange
             var expected = 4;
-            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new Dice());
+            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new RulesManager(), new Dice());
             snakesAndLadders.Move(3);
             //act
             var actual = snakesAndLadders.GetCurrentPosition();
@@ -37,7 +38,7 @@ namespace SnakesAndLaddersTest
         {
             //arrange
             var expected = 8;
-            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new Dice());
+            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new RulesManager(), new Dice());
             snakesAndLadders.Move(3);
             snakesAndLadders.Move(4);
             //act
@@ -52,14 +53,13 @@ namespace SnakesAndLaddersTest
             //arrange
             var expected = 100;
             var expectedWin = true;
-            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new Dice());
-            
-            while(snakesAndLadders.GetCurrentPosition() != 97)
-            {
-                snakesAndLadders.Move(1);
-            }
-            snakesAndLadders.Move(3);
+            var mockDice = new Mock<IDice>();
+            mockDice.Setup(x => x.Rolls()).Returns(96);
+            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new RulesManager(), mockDice.Object);
             //act
+            snakesAndLadders.RollDie();
+            snakesAndLadders.Move(3);
+            
             var actual = snakesAndLadders.GetCurrentPosition();
             var actualPlayerWin = snakesAndLadders.PlayerWin();
             //assert
@@ -72,14 +72,13 @@ namespace SnakesAndLaddersTest
         {
             //arrange
             var expected = 97;
-            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new Dice());
+            var mockDice = new Mock<IDice>();
+            mockDice.Setup(x => x.Rolls()).Returns(96);
+            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new RulesManager(), mockDice.Object);
 
-            while (snakesAndLadders.GetCurrentPosition() != 97)
-            {
-                snakesAndLadders.Move(1);
-            }
-            snakesAndLadders.Move(4);
             //act
+            snakesAndLadders.RollDie();
+            snakesAndLadders.Move(4);
             var actual = snakesAndLadders.GetCurrentPosition();
             //assert
             Assert.AreEqual(expected, actual);
@@ -91,7 +90,7 @@ namespace SnakesAndLaddersTest
             //arrange
             var expectedMin = 1;
             var expectedMax = 6;
-            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new Dice());
+            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new RulesManager(), new Dice());
 
             //act
             var actual = snakesAndLadders.RollDie();
@@ -105,8 +104,9 @@ namespace SnakesAndLaddersTest
         {
             //arrange
             var expected = 5;
-
-            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new FakeDice(4));
+            var mockDice = new Mock<IDice>();
+            mockDice.Setup(x => x.Rolls()).Returns(4);
+            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new RulesManager(), mockDice.Object);
             
             //act
             snakesAndLadders.RollDie();           
@@ -121,8 +121,9 @@ namespace SnakesAndLaddersTest
         {
             //arrange
             var expected = 2;
-
-            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new FakeDice(11));
+            var mockDice = new Mock<IDice>();
+            mockDice.Setup(x => x.Rolls()).Returns(11);
+            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new RulesManager(), mockDice.Object);
 
             //act
             snakesAndLadders.RollDie();

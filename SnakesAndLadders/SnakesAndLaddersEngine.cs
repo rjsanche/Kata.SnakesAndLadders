@@ -9,18 +9,17 @@ namespace SnakesAndLadders
     public class SnakesAndLaddersEngine
     {
         #region Fields
-        private const int INIT_POSITION = 1;
-        private const int END_POSITION = 100;
-        private int  _currentPosition;
+
         private IDice _dice;
+        private IRulesManager _rulesManager;
         #endregion
 
         #region Constructor
 
-        public SnakesAndLaddersEngine(IDice dice)
+        public SnakesAndLaddersEngine(IRulesManager rulesManager, IDice dice)
         {
             _dice = dice;
-            _currentPosition = INIT_POSITION;
+            _rulesManager = rulesManager;
         }
         #endregion
 
@@ -28,29 +27,17 @@ namespace SnakesAndLadders
 
         public int GetCurrentPosition()
         {
-            return _currentPosition;
+            return _rulesManager.GetCurrentPosition();
         }
 
         public void Move(int diceNumber)
         {
-            int tempPosition = _currentPosition + diceNumber;
-            tempPosition = CheckSpecialSquare(tempPosition);
-            if(tempPosition <= END_POSITION)
-            {
-                _currentPosition = tempPosition;
-            }
-        }
-
-        private int CheckSpecialSquare(int tempPosition)
-        {
-            if (tempPosition == 12)
-                return 2;
-            return tempPosition;
+            _rulesManager.Move(diceNumber);
         }
 
         public bool PlayerWin()
         {
-            return GetCurrentPosition() == END_POSITION;
+            return _rulesManager.PlayerWin();
         }
 
         public int RollDie()
