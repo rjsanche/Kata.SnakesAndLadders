@@ -12,12 +12,14 @@ namespace SnakesAndLadders
         private const int INIT_POSITION = 1;
         private const int END_POSITION = 100;
         private int  _currentPosition;
+        private IDice _dice;
         #endregion
 
         #region Constructor
 
-        public SnakesAndLaddersEngine()
+        public SnakesAndLaddersEngine(IDice dice)
         {
+            _dice = dice;
             _currentPosition = INIT_POSITION;
         }
         #endregion
@@ -32,10 +34,18 @@ namespace SnakesAndLadders
         public void Move(int diceNumber)
         {
             int tempPosition = _currentPosition + diceNumber;
+            tempPosition = CheckSpecialSquare(tempPosition);
             if(tempPosition <= END_POSITION)
             {
                 _currentPosition = tempPosition;
             }
+        }
+
+        private int CheckSpecialSquare(int tempPosition)
+        {
+            if (tempPosition == 12)
+                return 2;
+            return tempPosition;
         }
 
         public bool PlayerWin()
@@ -45,8 +55,7 @@ namespace SnakesAndLadders
 
         public int RollDie()
         {            
-            Random random = new Random();
-            int result =  random.Next(1, 6);
+            int result =  _dice.Rolls();
             Move(result);
             return result;
         }

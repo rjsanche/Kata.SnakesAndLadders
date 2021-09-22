@@ -12,8 +12,8 @@ namespace SnakesAndLadders
             Console.WriteLine("if rolls a die and the next square is over 100 then your token does not move from last square");
             Console.WriteLine("Press enter to start.");
             Console.ReadLine();
-
-            SnakesAndLaddersEngine snakesAndLaddersEngine = new SnakesAndLaddersEngine();
+            IDice dice = new Dice();
+            SnakesAndLaddersEngine snakesAndLaddersEngine = new SnakesAndLaddersEngine(dice);
             while(!snakesAndLaddersEngine.PlayerWin())
             {
                 Console.WriteLine();

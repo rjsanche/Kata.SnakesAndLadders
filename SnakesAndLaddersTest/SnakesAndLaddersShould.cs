@@ -11,7 +11,8 @@ namespace SnakesAndLaddersTest
         {
             //arrange
             var expected = 1;
-            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine();
+            
+            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new Dice());
             //act
             var actual = snakesAndLadders.GetCurrentPosition();
             //assert
@@ -23,7 +24,7 @@ namespace SnakesAndLaddersTest
         {
             //arrange
             var expected = 4;
-            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine();
+            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new Dice());
             snakesAndLadders.Move(3);
             //act
             var actual = snakesAndLadders.GetCurrentPosition();
@@ -36,7 +37,7 @@ namespace SnakesAndLaddersTest
         {
             //arrange
             var expected = 8;
-            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine();
+            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new Dice());
             snakesAndLadders.Move(3);
             snakesAndLadders.Move(4);
             //act
@@ -51,7 +52,7 @@ namespace SnakesAndLaddersTest
             //arrange
             var expected = 100;
             var expectedWin = true;
-            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine();
+            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new Dice());
             
             while(snakesAndLadders.GetCurrentPosition() != 97)
             {
@@ -71,7 +72,7 @@ namespace SnakesAndLaddersTest
         {
             //arrange
             var expected = 97;
-            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine();
+            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new Dice());
 
             while (snakesAndLadders.GetCurrentPosition() != 97)
             {
@@ -90,7 +91,7 @@ namespace SnakesAndLaddersTest
             //arrange
             var expectedMin = 1;
             var expectedMax = 6;
-            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine();
+            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new Dice());
 
             //act
             var actual = snakesAndLadders.RollDie();
@@ -103,15 +104,30 @@ namespace SnakesAndLaddersTest
         public void GivenThePlayerRolls4ThenMoveTheirTokenThenMove4Spaces()
         {
             //arrange
-            var expected = 4;
-            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine();
-            int lastPosition = 0;
+            var expected = 5;
+
+            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new FakeDice(4));
+            
             //act
-            while(snakesAndLadders.RollDie() != 4)
-            {
-                lastPosition = snakesAndLadders.GetCurrentPosition();
-            }
-            var actual = snakesAndLadders.GetCurrentPosition() - lastPosition;
+            snakesAndLadders.RollDie();           
+
+            var actual = snakesAndLadders.GetCurrentPosition();
+            //assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void GivenThereIsASnakeConnectingSquares2and12sWhenTokenIsIn12ThenReturnTo2()
+        {
+            //arrange
+            var expected = 2;
+
+            SnakesAndLaddersEngine snakesAndLadders = new SnakesAndLaddersEngine(new FakeDice(11));
+
+            //act
+            snakesAndLadders.RollDie();
+
+            var actual = snakesAndLadders.GetCurrentPosition();
             //assert
             Assert.AreEqual(expected, actual);
         }
